@@ -13,7 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+#author Joe Tan
 import webapp2
 import jinja2
 import json
@@ -28,6 +28,18 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/index.html')
         self.response.out.write(template.render())
 
+class MapHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/map.html')
+        self.response.out.write(template.render())
+
+class AboutHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/about.html')
+        self.response.out.write(template.render())
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/map', MapHandler),
+    ('/about', AboutHandler),
+    ('/.*', MainHandler)
 ], debug=True)
